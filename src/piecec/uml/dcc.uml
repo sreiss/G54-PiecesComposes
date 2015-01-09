@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="719.0" y="0.0">piecec.model.Piece</node>
+    <node x="425.0" y="564.5">piecec.view.IHMServiceCommercial</node>
+    <node x="0.0" y="551.0">piecec.view.IHMGestionnaireStock</node>
+    <node x="224.37499999999994" y="139.0">piecec.controller.GestionnairePieces</node>
+    <node x="641.375" y="289.0">piecec.model.PieceBase</node>
+    <node x="813.375" y="248.0">piecec.model.PieceComposite</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="piecec.model.PieceComposite" target="piecec.model.Piece">
+      <point x="70.0" y="-72.0" />
+      <point x="1023.375" y="109.0" />
+      <point x="838.875" y="109.0" />
+      <point x="51.375" y="44.5" />
+    </edge>
+    <edge source="piecec.model.PieceBase" target="piecec.model.Piece">
+      <point x="0.0" y="-31.0" />
+      <point x="717.375" y="119.0" />
+      <point x="770.375" y="119.0" />
+      <point x="-17.125" y="44.5" />
+    </edge>
+    <edge source="piecec.controller.GestionnairePieces" target="piecec.model.Piece">
+      <point x="5.6843418860808015E-14" y="-181.0" />
+      <point x="422.875" y="109.0" />
+      <point x="736.125" y="109.0" />
+      <point x="-51.375" y="44.5" />
+    </edge>
+    <edge source="piecec.view.IHMGestionnaireStock" target="piecec.controller.GestionnairePieces">
+      <point x="0.0" y="-99.5" />
+      <point x="202.5" y="526.0" />
+      <point x="323.62499999999994" y="526.0" />
+      <point x="-99.25" y="181.0" />
+    </edge>
+    <edge source="piecec.view.IHMServiceCommercial" target="piecec.controller.GestionnairePieces">
+      <point x="0.0" y="-86.0" />
+      <point x="617.5" y="526.0" />
+      <point x="522.125" y="526.0" />
+      <point x="99.25000000000006" y="181.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="547.0" y="375.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
