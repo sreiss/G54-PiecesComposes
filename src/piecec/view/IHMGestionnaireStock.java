@@ -17,68 +17,22 @@ import java.util.Scanner;
 /**
  * Created by Simon on 19/12/2014.
  */
-public class IHMGestionnaireStock {
+public class IHMGestionnaireStock extends Vue {
     private GestionnairePieces gestionnairePieces;
 
     public IHMGestionnaireStock() {
+        super();
         this.gestionnairePieces = gestionnairePieces.getInstance();
     }
 
-    private String readInput(String defaultValue) {
-        String s = defaultValue;
-        BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
-
-        try {
-            s = buffer.readLine();
-        } catch (IOException e) {
-            System.out.println("Reading crash...");
-        }
-
-        return s;
-    }
-
-    public void afficherMenu() {
-        String[] actionsDesc = {
-                "1. Ajouter une nouvelle piece",
-                "2. Ajouter une piece composite",
-                "3. Lister toutes les pieces référencées",
-                "4. Afficher les caractéristiques d'une pièce",
-                "5. Afficher la pièce la plus complexe"
-        };
-        System.out.println("Bienvenue, gestionnaire de stock ! Voici les actions que vous pouvez effectuer :");
-        for (String aDesc:actionsDesc) {
-            System.out.println(aDesc);
-        }
-
-        System.out.println("Que voulez-vous faire ?");
-        String action = this.readInput("1");
-        int actionInt = Integer.parseInt(action);
-        switch (actionInt) {
-            case 1:
-                this.saisirPieceBase();
-                break;
-            case 2:
-                this.saisirPieceComposite();
-                break;
-            case 3:
-                this.listerPieces();
-                break;
-            case 4:
-                this.afficherCaracteristiques();
-                break;
-            case 5:
-                this.afficherPieceLaPlusComplexe();
-                break;
-            default:
-                System.out.print("Action non reconnue.");
-                break;
-        }
-        afficherMenu();
-    }
-
     public void afficherPieceLaPlusComplexe() {
-        Piece p = this.gestionnairePieces.getPieceLaPlusComplexe();
-        System.out.println(MessageFormat.format("Piece la plus complexe : ", p.toString()));
+        Piece pieceLaPlusComplexe = this.gestionnairePieces.getPieceLaPlusComplexe();
+
+        if (pieceLaPlusComplexe != null) {
+            System.out.println(MessageFormat.format("La piece la plus complexe est : {0}", pieceLaPlusComplexe.toString()));
+        } else {
+            System.out.println("Il n'y a pas de piece en stock !");
+        }
     }
 
     public void afficherCaracteristiques() {

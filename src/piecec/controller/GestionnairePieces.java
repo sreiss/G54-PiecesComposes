@@ -4,6 +4,7 @@ import piecec.model.Piece;
 import piecec.model.PieceBase;
 import piecec.model.PieceComposite;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,21 +42,21 @@ public class GestionnairePieces {
     }
 
     public int addPieceComposite (String nom, float coutAssemblage, List<Integer> pieceNumids) {
-        List<Piece> pieces = new ArrayList<Piece>();
+        List<Piece> piecesComposantes = new ArrayList<Piece>();
         boolean canBeAdded = true;
         for (int numid:pieceNumids) {
             Piece piece = this.getPieceById(numid);
             if (piece != null) {
-                pieces.add(piece);
+                piecesComposantes.add(piece);
             } else {
                 canBeAdded = false;
             }
         }
 
         if (canBeAdded) {
-            PieceComposite piece = new PieceComposite(nom, coutAssemblage, pieces);
-            pieces.add(piece);
-            return piece.getNumid();
+            PieceComposite pieceComposite = new PieceComposite(nom, coutAssemblage, piecesComposantes);
+            pieces.add(pieceComposite);
+            return pieceComposite.getNumid();
         }
 
         return -1;
@@ -72,20 +73,12 @@ public class GestionnairePieces {
     }
 
     public Piece getPieceLaPlusComplexe() {
-        return this.computePieceLaPlusComplete(this.pieces, 0);
-    }
-
-    private Piece computePieceLaPlusComplete(List<Piece> pieces, int profondeur) {
         Piece pieceLaPlusComplexe = null;
-        int profondeurActuelle = 0;
-        for (Piece p : pieces) {
-            if (profondeurActuelle >= profondeur) {
-                if (p instanceof PieceBase) {
-                    pieceLaPlusComplexe = p;
-                } else if (p instanceof PieceComposite) {
-                    profondeurActuelle += 1;
-                    pieceLaPlusComplexe = this.computePieceLaPlusComplete(((PieceComposite) p).getPieces(), profondeurActuelle);
-                }
+        for (Piece p:pieces) {
+            if (pieceLaPlusComplexe == null) {
+                pieceLaPlusComplexe = p;
+            } else if (p.computeComplexite() > pieceLaPlusComplexe.computeComplexite()) {
+                pieceLaPlusComplexe = p;
             }
         }
 
@@ -93,10 +86,22 @@ public class GestionnairePieces {
     }
 
     public int computeValorisationStock () {
-        return 0;
+        int valorisationNiveau = 0;
+        for (Piece p: pieces) {
+            valorisationNiveau += p.computePrix();
+        }
+        return valorisationNiveau;
     }
 
     public List<Piece> getPiecesAVendre() {
-        return null;
+
+        return new ArrayList<Piece>();
+    }
+
+    public void chargerJeuDessai() {
+        for (int i = 0; i < 10; i++) {
+            this.addPieceBase("B" + i, i + 10);
+        }
+        System.out.println("Jeu d'essai chargé");
     }
 }

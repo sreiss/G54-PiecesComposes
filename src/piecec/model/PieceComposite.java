@@ -16,11 +16,19 @@ public class PieceComposite extends Piece {
     }
 
     public int computeComplexite() {
-        return 0;
+        int complexite = 0;
+        for (Piece p:pieces) {
+            complexite += p.computeComplexite();
+        }
+        return complexite;
     }
 
     public float computePrix() {
-        return 0;
+        float prix = this.getCoutAssemblage();
+        for (Piece p: pieces) {
+            prix += p.computePrix();
+        }
+        return prix;
     }
 
     public float getCoutAssemblage() {

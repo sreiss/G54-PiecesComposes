@@ -16,11 +16,11 @@ public class PieceBase extends Piece {
     }
 
     public int computeComplexite() {
-        return 0;
+        return 1;
     }
 
     public float computePrix() {
-        return 0;
+        return this.prixAchat;
     }
 
     public void setPrixAchat(float prixAchat) {
