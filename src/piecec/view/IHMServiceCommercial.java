@@ -2,6 +2,7 @@ package piecec.view;
 
 import piecec.controller.GestionnairePieces;
 import piecec.model.Piece;
+import piecec.model.PieceBase;
 
 import java.text.MessageFormat;
 import java.util.List;

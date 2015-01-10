@@ -47,7 +47,9 @@ public class GestionnairePieces {
         for (int numid:pieceNumids) {
             Piece piece = this.getPieceById(numid);
             if (piece != null) {
-                piecesComposantes.add(piece);
+                if (!piecesComposantes.contains(piece)) {
+                    piecesComposantes.add(piece);
+                }
             } else {
                 canBeAdded = false;
             }
@@ -104,8 +106,8 @@ public class GestionnairePieces {
     }
 
     public void chargerJeuDessai() {
-        for (int i = 0; i < 10; i++) {
-            this.addPieceBase("B" + i, i + 10);
+        for (int i = 1; i < 10; i++) {
+            this.addPieceBase("B" + i, (float)i * 10);
         }
         System.out.println("Jeu d'essai chargé");
     }
