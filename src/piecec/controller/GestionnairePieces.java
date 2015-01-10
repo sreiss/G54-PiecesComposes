@@ -43,25 +43,31 @@ public class GestionnairePieces {
 
     public int addPieceComposite (String nom, float coutAssemblage, List<Integer> pieceNumids) {
         List<Piece> piecesComposantes = new ArrayList<Piece>();
-        boolean canBeAdded = true;
-        for (int numid:pieceNumids) {
+        int errorCode = 0;
+
+        for (int numid : pieceNumids) {
             Piece piece = this.getPieceById(numid);
             if (piece != null) {
-                if (!piecesComposantes.contains(piece)) {
-                    piecesComposantes.add(piece);
+                if (!piece.estDansUnePiece()) {
+                    if (!piecesComposantes.contains(piece)) {
+                        piecesComposantes.add(piece);
+                    }
+                } else {
+                    errorCode = -2;
                 }
             } else {
-                canBeAdded = false;
+                errorCode = -1;
             }
         }
 
-        if (canBeAdded) {
+        int result = errorCode;
+        if (errorCode == 0) {
             PieceComposite pieceComposite = new PieceComposite(nom, coutAssemblage, piecesComposantes);
             pieces.add(pieceComposite);
-            return pieceComposite.getNumid();
+            result = pieceComposite.getNumid();
         }
 
-        return -1;
+        return result;
     }
 
     public Piece getPieceById(int id) {
@@ -98,7 +104,6 @@ public class GestionnairePieces {
     public List<Piece> getPiecesAVendre() {
         List<Piece> piecesAVendre = new ArrayList<Piece>();
         for (Piece p:pieces) {
-            System.out.println(p.estDansUnePiece());
             if (!p.estDansUnePiece())
                 piecesAVendre.add(p);
         }

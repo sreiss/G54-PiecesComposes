@@ -32,7 +32,7 @@ public class IHMGestionnaireStock extends Vue {
         if (pieceLaPlusComplexe != null) {
             System.out.println(MessageFormat.format("La piece la plus complexe est : {0}", pieceLaPlusComplexe.toString()));
         } else {
-            System.out.println("Il n'y a pas de piece en stock !");
+            System.out.println("ERREUR : Il n'y a pas de piece en stock !");
         }
     }
 
@@ -79,8 +79,8 @@ public class IHMGestionnaireStock extends Vue {
                 System.out.println(MessageFormat.format("La pièce a bien été ajoutée, elle porte le numid {0}", numid));
             }
         } catch (NumberFormatException e) {
-            System.out.println("Les prix des pieces doivent être au format suivant : 1.0, vous avez probablement mis une virgule.");
-            System.out.println("Veuillez réessayer d'ajouter la piece.");
+            System.out.println("ERREUR : Les prix des pieces doivent être au format suivant : 1.0, vous avez probablement mis une virgule.");
+            System.out.println("ERREUR : Veuillez réessayer d'ajouter la piece.");
         }
     }
 
@@ -107,13 +107,15 @@ public class IHMGestionnaireStock extends Vue {
 
             int numid = this.gestionnairePieces.addPieceComposite(nom, coutAssemblage, pieceNumids);
 
-            if (numid < 0) {
-                System.out.println("ERREUR : la piece n'a pas pu être ajouté.");
+            if (numid == -1) {
+                System.out.println("ERREUR : la piece n'a pas pu être ajouté. Une des pieces renseignées n'existait pas.");
+            } else if (numid == -2) {
+                System.out.println("ERREUR : la piece n'a pas pu être ajouté. Une des pieces est déjà utilisée dans une autre piece.");
             } else {
                 System.out.println(MessageFormat.format("Pièce ajoutée, numid : {0}", numid));
             }
         } catch (NumberFormatException e) {
-            System.out.println("Les prix des pieces doivent être au format suivant : 1.0, vous avez probablement mis une virgule.");
+            System.out.println("ERREUR : Les prix des pieces doivent être au format suivant : 1.0, vous avez probablement mis une virgule.");
             System.out.println("Veuillez réessayer d'ajouter la piece.");
         }
     }

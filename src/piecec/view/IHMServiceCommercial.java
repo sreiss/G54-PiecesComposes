@@ -3,6 +3,7 @@ package piecec.view;
 import piecec.controller.GestionnairePieces;
 import piecec.model.Piece;
 import piecec.model.PieceBase;
+import piecec.model.PieceComposite;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -31,9 +32,19 @@ public class IHMServiceCommercial extends Vue {
 
         Piece p = gestionnairePieces.getPieceById(numid);
         if (p != null) {
-            System.out.println(MessageFormat.format("Voici la piece : {0}", p));
+            System.out.println("Voici la piece :");
+            String type = "base";
+            if (p instanceof PieceComposite)
+                type = "compose";
+            System.out.println(MessageFormat.format(
+                    "nom: {0}, type: {1}, complexite: {2}, prix: {3}",
+                    p.getNom(),
+                    type,
+                    p.computeComplexite(),
+                    p.computePrix()
+            ));
         } else {
-            System.out.println("Cette piece n'existe pas.");
+            System.out.println("ERREUR : Cette piece n'existe pas.");
         }
     }
 
@@ -46,9 +57,13 @@ public class IHMServiceCommercial extends Vue {
     public void listerPiecesAVendre() {
         List<Piece> piecesAVendre = gestionnairePieces.getPiecesAVendre();
 
-        System.out.println("Voici les pièces disponibles à la vente :");
-        for (Piece p: piecesAVendre) {
-            System.out.println(p.toString());
+        if (piecesAVendre.size() > 0) {
+            System.out.println("Voici les pièces disponibles à la vente :");
+            for (Piece p : piecesAVendre) {
+                System.out.println(p.toString());
+            }
+        } else {
+            System.out.println("Aucune piece disponible à la vente.");
         }
     }
 }
