@@ -7,6 +7,7 @@ public abstract class Piece {
     private static int currentNumid = 1;
     private String nom;
     private int numid;
+    private boolean estDansUnePiece;
 
     public Piece (String nom) {
         this.numid = Piece.currentNumid;
@@ -34,5 +35,13 @@ public abstract class Piece {
 
     public void setNumid(int numid) {
         this.numid = numid;
+    }
+
+    public boolean estDansUnePiece() {
+        return estDansUnePiece;
+    }
+
+    public void setEstDansUnePiece(boolean estDansUnePiece) {
+        this.estDansUnePiece = estDansUnePiece;
     }
 }

@@ -94,8 +94,13 @@ public class GestionnairePieces {
     }
 
     public List<Piece> getPiecesAVendre() {
-
-        return new ArrayList<Piece>();
+        List<Piece> piecesAVendre = new ArrayList<Piece>();
+        for (Piece p:pieces) {
+            System.out.println(p.estDansUnePiece());
+            if (!p.estDansUnePiece())
+                piecesAVendre.add(p);
+        }
+        return piecesAVendre;
     }
 
     public void chargerJeuDessai() {

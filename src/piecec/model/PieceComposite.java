@@ -12,6 +12,9 @@ public class PieceComposite extends Piece {
     public PieceComposite(String nom, float coutAssemblage, List<Piece> pieces) {
         super(nom);
         this.coutAssemblage = coutAssemblage;
+        for (Piece p:pieces) {
+            p.setEstDansUnePiece(true);
+        }
         this.pieces = pieces;
     }
 
